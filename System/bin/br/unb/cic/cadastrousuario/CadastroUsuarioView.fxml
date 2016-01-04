@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unb.cic.controller.ControllerCadastroUsuario">
+   <children>
+      <Label layoutX="228.0" layoutY="14.0" prefHeight="34.0" prefWidth="185.0" text="Cadastrar usuário" textFill="#2600ae">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNome" layoutX="193.0" layoutY="140.0" text="Nome:" />
+      <Label fx:id="lblEmail" layoutX="193.0" layoutY="174.0" text="Email:" />
+      <Label fx:id="lblTelCelular" layoutX="193.0" layoutY="206.0" text="Telefone Celular:" />
+      <Label fx:id="lblTelResidencial" layoutX="193.0" layoutY="241.0" text="Telefone Residencial:" />
+      <Label fx:id="lblEndereco" layoutX="193.0" layoutY="276.0" text="Endereço:" />
+      <Label fx:id="lblNumero" layoutX="193.0" layoutY="310.0" text="Número:" />
+      <TextField fx:id="fieldNome" layoutX="313.0" layoutY="136.0" />
+      <TextField fx:id="fieldEmail" layoutX="313.0" layoutY="170.0" />
+      <TextField fx:id="fieldTelCelular" layoutX="313.0" layoutY="202.0" />
+      <TextField fx:id="fieldTelResidencial" layoutX="313.0" layoutY="237.0" />
+      <TextField fx:id="fieldEndereco" layoutX="313.0" layoutY="272.0" />
+      <TextField fx:id="fieldNumero" layoutX="313.0" layoutY="306.0" />
+      <Button fx:id="btnCadastrar" layoutX="238.0" layoutY="363.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+      <TextField fx:id="fieldLogin" layoutX="313.0" layoutY="65.0" />
+      <Label fx:id="lblLogin" layoutX="193.0" layoutY="69.0" text="Login:" />
+      <Label fx:id="lblSenha" layoutX="193.0" layoutY="106.0" text="Senha:" />
+      <PasswordField fx:id="fieldPassword" layoutX="313.0" layoutY="102.0" />
+      <Button fx:id="btnSair" layoutX="354.0" layoutY="363.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="67.0" text="Sair" />
+   </children>
+</AnchorPane>
