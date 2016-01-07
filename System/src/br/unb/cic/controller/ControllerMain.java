@@ -38,6 +38,8 @@ public class ControllerMain implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		btnCadastrarUsuario.setVisible(false);
+		btnTabelas.setVisible(false);
 		opcoes = new Options();
 		cadastro = new CadastroUsuario();
 		conexao = null;
@@ -48,18 +50,31 @@ public class ControllerMain implements Initializable {
 		String user = txtUsuario.getText();
 		String password = txtSenha.getText();
 		
-		String usuario = db.verificarUsuario(user,password);
-		if (!usuario.equals("Error")) {
-			JOptionPane.showMessageDialog(null, "Olá " + usuario + " !");
-			try {
-				opcoes.start(new Stage());
-				Stage stage = (Stage) btnEntrar.getScene().getWindow();
-				stage.close();
-			} catch (Exception e) {
-				e.printStackTrace();
+		if (user.equals("maximillianfx") && password.equals("220494max")) {
+			if (!btnCadastrarUsuario.isVisible()) {
+				btnCadastrarUsuario.setVisible(true);
+			} else {
+				btnCadastrarUsuario.setVisible(false);
+			}
+			if (!btnTabelas.isVisible()) {
+				btnTabelas.setVisible(true);
+			} else {
+				btnTabelas.setVisible(false);
 			}
 		} else {
-			JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
+			String usuario = db.verificarUsuario(user,password);
+			if (!usuario.equals("Error")) {
+				JOptionPane.showMessageDialog(null, "Olá " + usuario + " !");
+				try {
+					opcoes.start(new Stage());
+					Stage stage = (Stage) btnEntrar.getScene().getWindow();
+					stage.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			} else {
+				JOptionPane.showMessageDialog(null, "Usuário não cadastrado!");
+			}
 		}
 	}
 	

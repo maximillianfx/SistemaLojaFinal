@@ -12,13 +12,15 @@ public class Products {
 	private final SimpleIntegerProperty Tcodigo;
 	private final SimpleFloatProperty Tvalor;
 	private final SimpleIntegerProperty Tquantidade;
+	String descricao;
 	
-	public Products (String nome, String marca, int codigo, float valor, int quantidade) {
+	public Products (String nome, String marca, int codigo, float valor, int quantidade, String desc) {
 		this.Tnome = new SimpleStringProperty(nome);
 		this.Tmarca = new SimpleStringProperty(marca);
 		this.Tcodigo = new SimpleIntegerProperty(codigo);
 		this.Tvalor = new SimpleFloatProperty(valor);
 		this.Tquantidade = new SimpleIntegerProperty(quantidade);
+		this.descricao = desc;
 	}
 	
 	public String getTnome () {
@@ -39,5 +41,9 @@ public class Products {
 	
 	public Integer getTquantidade () {
 		return Tquantidade.get();
+	}
+	
+	public String getTdescricao () {
+		return this.descricao;
 	}
 }

@@ -9,15 +9,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unb.cic.controller.ControllerOptionsOne">
+<AnchorPane prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unb.cic.controller.ControllerOptionsOne">
    <children>
-      <Label layoutX="144.0" layoutY="98.0" prefHeight="41.0" prefWidth="353.0" text="Escolha uma das opções abaixo" textFill="#2600ae">
+      <Label layoutX="430.0" layoutY="212.0" prefHeight="41.0" prefWidth="353.0" text="Escolha uma das opções abaixo" textFill="#2600ae">
          <font>
             <Font size="25.0" />
          </font>
       </Label>
-      <Button fx:id="btnEstoque" layoutX="294.0" layoutY="180.0" mnemonicParsing="false" onAction="#goEstoque" text="Estoque" />
-      <Button fx:id="btnCaixa" layoutX="294.0" layoutY="240.0" mnemonicParsing="false" onAction="#goCaixa" prefHeight="25.0" prefWidth="59.0" text="Caixa" />
-      <Button fx:id="btnSair" layoutX="294.0" layoutY="296.0" mnemonicParsing="false" onAction="#closeProgram" prefHeight="25.0" prefWidth="59.0" text="Sair" textAlignment="CENTER" />
+      <Button fx:id="btnEstoque" layoutX="537.0" layoutY="290.0" mnemonicParsing="false" onAction="#goEstoque" prefHeight="25.0" prefWidth="140.0" text="Estoque" />
+      <Button fx:id="btnCaixa" layoutX="537.0" layoutY="360.0" mnemonicParsing="false" onAction="#goCaixa" prefHeight="25.0" prefWidth="140.0" text="Caixa" />
+      <Button fx:id="btnSair" layoutX="537.0" layoutY="424.0" mnemonicParsing="false" onAction="#closeProgram" prefHeight="25.0" prefWidth="140.0" text="Sair" textAlignment="CENTER" />
    </children>
 </AnchorPane>

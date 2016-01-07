@@ -15,7 +15,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/br/unb/cic/main/InitView.fxml"));
-			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon32.jpg")));
+			primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icons/icon32.jpg")));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();

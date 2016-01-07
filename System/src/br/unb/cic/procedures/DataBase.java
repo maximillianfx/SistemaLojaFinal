@@ -235,7 +235,7 @@ public class DataBase {
 	public ArrayList<Products> getProdutos () {
 		Connection c = null;
 		Statement stmt = null;
-		String nome, marca;
+		String nome, marca, descricao;
 		int quantidade, codigo;
 		float valor;
 		String status;
@@ -253,7 +253,8 @@ public class DataBase {
 				valor = rs.getFloat("valor");
 				codigo = rs.getInt("codigo");
 				quantidade = rs.getInt("quantidade");
-				produtos.add(new Products(nome, marca, codigo, valor, quantidade));
+				descricao = rs.getString("descricao");
+				produtos.add(new Products(nome, marca, codigo, valor, quantidade,descricao));
 			}
 			stmt.close();
 			c.close();
@@ -331,52 +332,39 @@ public class DataBase {
 	}
 
 	
-	
+	public String buscaDescricao (String codigo) {
+		Connection c = null;
+		Statement stmt = null;
+		String descricao = null;
+		String code;
+		String status;
+		//Bloco try-catch
+		try {
+			//Carregamento do driver JDBC para execução dos tratamentos SQL e abertura de conexão com a tabela
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:bd/products.db");
+			c.setAutoCommit(false);
+			
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTS;");
+			while (rs.next()) {
+				code = rs.getString("codigo");
+				if (code.equals(codigo)) {
+					descricao = rs.getString("descricao");
+				}
+			}
+			stmt.close();
+			c.close();
+			return descricao;
+		} catch (SQLException e) {
+			status = e.getMessage();
+			return (String) null;
+		} catch (ClassNotFoundException e) {
+			status = e.getMessage();
+			return (String) null;
+		} catch (Exception e) {
+			status = e.getMessage();
+			return (String) null;
+		}
+	}
 }
-	
-//	//Método para buscar o caracter ASCII de acordo um valor binario de 8 bits existente na tabela SQL
-//	public String BuscaAscii (String binariosource) {
-//		//Criação da conexao, statement  e variaveis auxiliares
-//		Connection c = null;
-//		Statement stmt = null;
-//		String caracter = "";
-//		String binx;
-//		String status;
-//		//Bloco try-catch
-//		try {
-//			//Carregamento do driver JDBC para execução dos tratamentos SQL e abertura de conexão com a tabela
-//			Class.forName("org.sqlite.JDBC");
-//			c = DriverManager.getConnection("jdbc:sqlite:bd/ascii.db");
-//			c.setAutoCommit(false);
-//			
-//			//Inicialização do statement
-//			stmt = c.createStatement();
-//			//Execução do comando SELECT sobre a tabela SQL e armazenagem do resultado em um ResulSet
-//			ResultSet rs = stmt.executeQuery("SELECT * FROM ASCII;");
-//			//Leitura do ResultSet
-//			while (rs.next()) {
-//				//Captura do valor na coluna binario
-//				binx = rs.getString("binario");
-//				//Caso o valor binario de 8 bits capturado na tabela seja igual ao enviado para o método
-//				//então retorna o caracter de acordo com a captura na coluna caracter
-//				if (binx.equals(binariosource)) {
-//					caracter = rs.getString("caracter");
-//				}
-//			}
-//			//Encerramento do statement e da conexao, e retorno do caracter
-//			stmt.close();
-//			c.close();
-//			return caracter;
-//			//Tratamento das possiveis exceções
-//		} catch (SQLException e) {
-//			status = e.getMessage();
-//			return (String) null;
-//		} catch (ClassNotFoundException e) {
-//			status = e.getMessage();
-//			return (String) null;
-//		} catch (Exception e) {
-//			status = e.getMessage();
-//			return (String) null;
-//		}
-//	}
-//}

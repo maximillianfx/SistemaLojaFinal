@@ -13,7 +13,7 @@ public class CadastroUsuario extends Application {
 	public void start(Stage stage) throws Exception {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/br/unb/cic/cadastrousuario/CadastroUsuarioView.fxml"));
-			stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon32.jpg")));
+			stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icons/icon32.jpg")));
 			Scene scene = new Scene(root);
 			stage.setScene(scene);
 			stage.show();
