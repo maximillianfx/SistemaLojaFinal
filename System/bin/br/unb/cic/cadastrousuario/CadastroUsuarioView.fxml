@@ -6,30 +6,55 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unb.cic.controller.ControllerCadastroUsuario">
+<AnchorPane fx:id="paneFundo" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unb.cic.controller.ControllerCadastroUsuario">
    <children>
-      <Label layoutX="501.0" layoutY="14.0" prefHeight="34.0" prefWidth="185.0" text="Cadastrar usuário" textFill="#2600ae">
+      <Label fx:id="lblNome" layoutX="446.0" layoutY="140.0" text="Nome:">
          <font>
-            <Font size="23.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblNome" layoutX="446.0" layoutY="140.0" text="Nome:" />
-      <Label fx:id="lblEmail" layoutX="446.0" layoutY="174.0" text="Email:" />
-      <Label fx:id="lblTelCelular" layoutX="446.0" layoutY="206.0" text="Telefone Celular:" />
-      <Label fx:id="lblTelResidencial" layoutX="446.0" layoutY="241.0" text="Telefone Residencial:" />
-      <Label fx:id="lblEndereco" layoutX="446.0" layoutY="276.0" text="Endereço:" />
-      <Label fx:id="lblNumero" layoutX="446.0" layoutY="310.0" text="Número:" />
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblEmail" layoutX="446.0" layoutY="174.0" text="Email:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblTelCelular" layoutX="446.0" layoutY="206.0" text="Telefone Celular:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblTelResidencial" layoutX="446.0" layoutY="241.0" text="Telefone Residencial:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblEndereco" layoutX="446.0" layoutY="276.0" text="Endereço:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblNumero" layoutX="446.0" layoutY="310.0" text="Número:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <TextField fx:id="fieldNome" layoutX="569.0" layoutY="136.0" />
       <TextField fx:id="fieldEmail" layoutX="569.0" layoutY="170.0" />
       <TextField fx:id="fieldTelCelular" layoutX="569.0" layoutY="202.0" />
       <TextField fx:id="fieldTelResidencial" layoutX="569.0" layoutY="237.0" />
       <TextField fx:id="fieldEndereco" layoutX="569.0" layoutY="272.0" />
       <TextField fx:id="fieldNumero" layoutX="569.0" layoutY="306.0" />
-      <Button fx:id="btnCadastrar" layoutX="514.0" layoutY="351.0" mnemonicParsing="false" onAction="#cadastrar" text="Cadastrar" />
+      <Button fx:id="btnCadastrar" layoutX="414.0" layoutY="351.0" mnemonicParsing="false" onAction="#cadastrar" prefHeight="34.0" prefWidth="141.0" text="Cadastrar">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
       <TextField fx:id="fieldLogin" layoutX="569.0" layoutY="65.0" />
-      <Label fx:id="lblLogin" layoutX="446.0" layoutY="69.0" text="Login:" />
-      <Label fx:id="lblSenha" layoutX="446.0" layoutY="106.0" text="Senha:" />
+      <Label fx:id="lblLogin" layoutX="446.0" layoutY="69.0" text="Login:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblSenha" layoutX="446.0" layoutY="106.0" text="Senha:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <PasswordField fx:id="fieldPassword" layoutX="569.0" layoutY="102.0" />
-      <Button fx:id="btnSair" layoutX="610.0" layoutY="351.0" mnemonicParsing="false" onAction="#sair" prefHeight="25.0" prefWidth="67.0" text="Sair" />
+      <Button fx:id="btnSair" layoutX="600.0" layoutY="351.0" mnemonicParsing="false" onAction="#sair" prefHeight="34.0" prefWidth="141.0" text="Sair">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
    </children>
 </AnchorPane>

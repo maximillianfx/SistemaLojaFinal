@@ -1,7 +1,9 @@
 package br.unb.cic.controller;
 
+import java.awt.HeadlessException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -15,6 +17,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Stage;
 
 public class ControllerCadastroUsuario implements Initializable {
@@ -29,6 +38,7 @@ public class ControllerCadastroUsuario implements Initializable {
 	@FXML private TextField fieldLogin;
 	@FXML private PasswordField fieldPassword;
 	@FXML private Button btnSair;
+	@FXML private AnchorPane paneFundo;
 	protected DataBase bd;
 	protected Connection conexao;
 	protected Main main;
@@ -37,10 +47,16 @@ public class ControllerCadastroUsuario implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		bd = new DataBase();
 		conexao = null;
+		
+		BackgroundImage myBI= new BackgroundImage(new Image("images/program/CadastrarUsuario.png"),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                  BackgroundSize.DEFAULT);
+        //then you set to your node
+        paneFundo.setBackground(new Background(myBI));
 	}
 
 	
-	public void cadastrar () {
+	public void cadastrar () throws HeadlessException, SQLException {
 		String login = fieldLogin.getText();
 		String password = fieldPassword.getText();
 		String nome = fieldNome.getText();
@@ -49,7 +65,7 @@ public class ControllerCadastroUsuario implements Initializable {
 		String telresidencial = fieldTelResidencial.getText();
 		String endereco = fieldEndereco.getText();
 		String numero = fieldNumero.getText();
-		if (!bd.verificarCadastro(login)) { 
+		if (!bd.verificarCadastro(conexao,login)) { 
 			bd.addUser(conexao, login, password, nome, email, telcelular, telresidencial, endereco, numero);
 			JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");		
 			try {

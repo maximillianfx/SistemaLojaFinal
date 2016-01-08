@@ -47,7 +47,7 @@ public class DataBase {
 		}
 	}
 	
-	public void createTableUsers (Connection c) {
+	public void createTableUsers (Connection c) throws SQLException {
 		Statement stmt = null;
 		String status;
 		try {
@@ -74,12 +74,18 @@ public class DataBase {
 		} catch (SQLException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (ClassNotFoundException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (Exception e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		}
 	}
 
@@ -127,7 +133,7 @@ public class DataBase {
 		return true;
 	}
 	
-	public void addUser (Connection c, String login, String senha, String nome, String email, String telcelular, String telresidencial, String endereco, String numero) {
+	public void addUser (Connection c, String login, String senha, String nome, String email, String telcelular, String telresidencial, String endereco, String numero) throws SQLException {
 		Statement stmt = null;
 		String status;
 		
@@ -148,17 +154,22 @@ public class DataBase {
 		} catch (SQLException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (ClassNotFoundException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (Exception e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		}
 	}
 	
-	public String verificarUsuario (String login, String senha) {
-		Connection c = null;
+	public String verificarUsuario (Connection c, String login, String senha) throws SQLException {
 		Statement stmt = null;
 		String user, senhax;
 		String status;
@@ -174,7 +185,9 @@ public class DataBase {
 				user = rs.getString("login");
 				senhax = rs.getString("senha");
 				if (user.equals(login) && senhax.equals(senha)) {
-					return rs.getString("nome");
+					retorno = rs.getString("nome");
+					c.close();
+					return retorno;
 				} else {
 					retorno = "Error";
 				}
@@ -185,18 +198,23 @@ public class DataBase {
 		} catch (SQLException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (ClassNotFoundException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (Exception e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		}
 		return retorno;
 	}
 
-	public boolean verificarCadastro (String login) {
-		Connection c = null;
+	public boolean verificarCadastro (Connection c, String login) throws SQLException {
 		Statement stmt = null;
 		String log;
 		String status;
@@ -222,18 +240,23 @@ public class DataBase {
 		} catch (SQLException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (ClassNotFoundException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (Exception e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		}
 		return retorno;
 	}
 	
-	public ArrayList<Products> getProdutos () {
-		Connection c = null;
+	public ArrayList<Products> getProdutos (Connection c) throws SQLException {
 		Statement stmt = null;
 		String nome, marca, descricao;
 		int quantidade, codigo;
@@ -262,19 +285,24 @@ public class DataBase {
 		} catch (SQLException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (ClassNotFoundException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (Exception e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		}
 		return produtos;
 	}
 	
 	
-	public void deleteProduct (String codigo) {
-		Connection c = null;
+	public void deleteProduct (Connection c, String codigo) throws SQLException {
 		Statement stmt = null;
 		String status;
 		try {
@@ -289,21 +317,25 @@ public class DataBase {
 			stmt.close();
 			c.commit();
 			c.close();
-		
 		} catch (SQLException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (ClassNotFoundException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (Exception e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		}
 	}
 
-	public void atualizarProduto (String codigoOld, String nome, int codigoNew, String marca, int quantidade, float valor) {
-		Connection c = null;
+	public void atualizarProduto (Connection c, String codigoOld, String nome, int codigoNew, String marca, int quantidade, float valor) throws SQLException {
 		Statement stmt = null;
 		String status;
 		try {
@@ -322,18 +354,23 @@ public class DataBase {
 		} catch (SQLException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (ClassNotFoundException e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		} catch (Exception e) {
 			status = e.getMessage();
 			System.out.println(status);
+			stmt.close();
+			c.close();
 		}
 	}
 
 	
-	public String buscaDescricao (String codigo) {
-		Connection c = null;
+	public String buscaDescricao (Connection c, String codigo) throws SQLException {
 		Statement stmt = null;
 		String descricao = null;
 		String code;
@@ -351,6 +388,9 @@ public class DataBase {
 				code = rs.getString("codigo");
 				if (code.equals(codigo)) {
 					descricao = rs.getString("descricao");
+					stmt.close();
+					c.close();
+					return descricao;
 				}
 			}
 			stmt.close();
@@ -358,13 +398,98 @@ public class DataBase {
 			return descricao;
 		} catch (SQLException e) {
 			status = e.getMessage();
+			stmt.close();
+			c.close();
 			return (String) null;
 		} catch (ClassNotFoundException e) {
 			status = e.getMessage();
+			stmt.close();
+			c.close();
 			return (String) null;
 		} catch (Exception e) {
 			status = e.getMessage();
+			stmt.close();
+			c.close();
 			return (String) null;
 		}
+	}
+	
+	public float getValorProdutoEstoque (Connection c, int codigo) throws SQLException {
+		Statement stmt = null;
+		int code;
+		String status;
+		//Bloco try-catch
+		try {
+			//Carregamento do driver JDBC para execução dos tratamentos SQL e abertura de conexão com a tabela
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:bd/products.db");
+			c.setAutoCommit(false);
+			
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTS;");
+			while (rs.next()) {
+				code = rs.getInt("codigo");
+				if (code == codigo) {
+					int quantidade = rs.getInt("quantidade");
+					float preco = rs.getFloat("valor");
+					stmt.close();
+					c.close();
+					return (float)(preco*quantidade);
+				}
+			}
+			stmt.close();
+			c.close();
+			return -1;
+		} catch (SQLException e) {
+			status = e.getMessage();
+			stmt.close();
+			c.close();
+		} catch (ClassNotFoundException e) {
+			status = e.getMessage();
+			stmt.close();
+			c.close();
+		} catch (Exception e) {
+			status = e.getMessage();
+			stmt.close();
+			c.close();
+		}
+		return -1;
+	}
+	
+	public float getValorEstoque (Connection c) throws SQLException {
+		Statement stmt = null;
+		String status;
+		//Bloco try-catch
+		float valor = 0;
+		try {
+			//Carregamento do driver JDBC para execução dos tratamentos SQL e abertura de conexão com a tabela
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:bd/products.db");
+			c.setAutoCommit(false);
+			
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM PRODUCTS;");
+			while (rs.next()) {
+				int quantidade = rs.getInt("quantidade");
+				float preco = rs.getFloat("valor");
+				valor = valor + (preco*quantidade);
+			}
+			stmt.close();
+			c.close();
+			return valor;
+		} catch (SQLException e) {
+			status = e.getMessage();	
+			stmt.close();
+			c.close();
+		} catch (ClassNotFoundException e) {
+			status = e.getMessage();
+			stmt.close();
+			c.close();
+		} catch (Exception e) {
+			status = e.getMessage();
+			stmt.close();
+			c.close();
+		}
+		return -1;
 	}
 }

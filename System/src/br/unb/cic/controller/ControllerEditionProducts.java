@@ -15,6 +15,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Stage;
 
 public class ControllerEditionProducts implements Initializable {
@@ -28,6 +35,7 @@ public class ControllerEditionProducts implements Initializable {
 	@FXML private TextField fieldQuantidade;
 	@FXML private Button btnVoltar;
 	@FXML private Button btnConfirmar;
+	@FXML private AnchorPane paneFundo;
 	private DataBase bd;
 	private Connection conexao;
 	
@@ -45,6 +53,12 @@ public class ControllerEditionProducts implements Initializable {
 		fieldCodigo.setText(this.produto.getTcodigo().toString());
 		fieldValor.setText(this.produto.getTvalor().toString());
 		fieldQuantidade.setText(this.produto.getTquantidade().toString());	
+		
+		BackgroundImage myBI= new BackgroundImage(new Image("images/program/EditarProduto.png"),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                  BackgroundSize.DEFAULT);
+        //then you set to your node
+        paneFundo.setBackground(new Background(myBI));
 	}
 	
 	
@@ -77,7 +91,7 @@ public class ControllerEditionProducts implements Initializable {
 		}
 		
 		try {
-			bd.atualizarProduto (this.produto.getTcodigo().toString(),nome, codigo, marca, quantidade,valor);
+			bd.atualizarProduto (conexao,this.produto.getTcodigo().toString(),nome, codigo, marca, quantidade,valor);
 			estoque = new EstoqueView();
 			estoque.start(new Stage());
 			Stage stage = (Stage)btnConfirmar.getScene().getWindow();

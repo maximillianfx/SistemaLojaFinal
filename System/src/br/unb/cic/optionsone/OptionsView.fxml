@@ -9,15 +9,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unb.cic.controller.ControllerOptionsOne">
+<AnchorPane fx:id="paneFundo" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unb.cic.controller.ControllerOptionsOne">
    <children>
-      <Label layoutX="430.0" layoutY="212.0" prefHeight="41.0" prefWidth="353.0" text="Escolha uma das opções abaixo" textFill="#2600ae">
+      <Button fx:id="btnEstoque" layoutX="493.0" layoutY="260.0" mnemonicParsing="false" onAction="#goEstoque" prefHeight="36.0" prefWidth="215.0" text="Estoque">
          <font>
-            <Font size="25.0" />
-         </font>
-      </Label>
-      <Button fx:id="btnEstoque" layoutX="537.0" layoutY="290.0" mnemonicParsing="false" onAction="#goEstoque" prefHeight="25.0" prefWidth="140.0" text="Estoque" />
-      <Button fx:id="btnCaixa" layoutX="537.0" layoutY="360.0" mnemonicParsing="false" onAction="#goCaixa" prefHeight="25.0" prefWidth="140.0" text="Caixa" />
-      <Button fx:id="btnSair" layoutX="537.0" layoutY="424.0" mnemonicParsing="false" onAction="#closeProgram" prefHeight="25.0" prefWidth="140.0" text="Sair" textAlignment="CENTER" />
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="btnCaixa" layoutX="493.0" layoutY="325.0" mnemonicParsing="false" onAction="#goCaixa" prefHeight="36.0" prefWidth="215.0" text="Caixa">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
+      <Button fx:id="btnSair" layoutX="493.0" layoutY="390.0" mnemonicParsing="false" onAction="#closeProgram" prefHeight="36.0" prefWidth="215.0" text="Sair" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
    </children>
 </AnchorPane>

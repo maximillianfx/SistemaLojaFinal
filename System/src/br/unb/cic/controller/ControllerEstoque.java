@@ -17,22 +17,33 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.effect.Shadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -51,6 +62,7 @@ public class ControllerEstoque implements Initializable {
 	@FXML private Button btnVoltar;
 	@FXML private Button btnDeletar;
 	@FXML private Button btnFoto;
+	@FXML private Button btnValorEstoque;
 	@FXML private TextArea fieldDescricaoArea;
 	@FXML private TextField fieldNome;
 	@FXML private TextField fieldMarca;
@@ -59,6 +71,8 @@ public class ControllerEstoque implements Initializable {
 	@FXML private TextField fieldDescricao;
 	@FXML private TextField fieldBusca;
 	@FXML private TextField fieldCodigo;
+	@FXML private Label lblValorEstoque;
+	@FXML private AnchorPane paneFundo;
 	@FXML TableView<Products> tabelaProdutos;
 	@FXML TableColumn<Products, String> tabelaNome;
 	@FXML TableColumn<Products, String> tabelaMarca;
@@ -70,6 +84,7 @@ public class ControllerEstoque implements Initializable {
 	private Options options;
 	private String nomeImagem = "";
 	private File file = null;
+	private NumberFormat z = NumberFormat.getCurrencyInstance();
 	
 	public ControllerEstoque () {
 		bd = new DataBase();
@@ -82,20 +97,15 @@ public class ControllerEstoque implements Initializable {
 		tabelaNome.setCellValueFactory(new PropertyValueFactory<Products, String>("Tnome"));
 		tabelaMarca.setCellValueFactory(new PropertyValueFactory<Products, String>("Tmarca"));
 		tabelaCodigo.setCellValueFactory(new PropertyValueFactory<Products, Integer>("Tcodigo"));
-		tabelaValor.setCellValueFactory(new PropertyValueFactory<Products, Float>("Tvalor"));
 		tabelaQuantidade.setCellValueFactory(new PropertyValueFactory<Products, Integer>("Tquantidade"));
-		
-		updateTable();
-		tabelaProdutos.setItems(data);	
-		
+		tabelaValor.setCellValueFactory(new PropertyValueFactory<Products, Float>("Tvalor"));
+	
 		FilteredList<Products> filteredData = new FilteredList<>(data, p -> true);
-		
 		fieldBusca.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredData.setPredicate(produto -> {
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
-
                 String lowerCaseFilter = newValue.toLowerCase();
                 if (produto.getTnome().toLowerCase().contains(lowerCaseFilter)) {
                     return true;
@@ -107,20 +117,60 @@ public class ControllerEstoque implements Initializable {
                 	return false;
             });
         });
-
-        SortedList<Products> sortedData = new SortedList<>(filteredData);
+		SortedList<Products> sortedData = new SortedList<>(filteredData);
         sortedData.comparatorProperty().bind(tabelaProdutos.comparatorProperty());
         tabelaProdutos.setItems(sortedData);
+		
+		tabelaValor.setCellFactory(TextFieldTableCell.<Products, Float>forTableColumn(new StringConverter<Float>() {
+	        private final NumberFormat nf = NumberFormat.getNumberInstance();
+
+	        {
+	             nf.setMaximumFractionDigits(2);
+	             nf.setMinimumFractionDigits(2);
+	        }
+	        @Override public Float fromString(final String s) {
+	            // Don't need this, unless table is editable, see DoubleStringConverter if needed
+	            return null; 
+	        }
+
+			@Override
+			public String toString(Float arg0) {
+	            return nf.format(arg0);
+			}
+	    }));		
+		
+		try {
+			updateTable();
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}	
         
         fieldDescricaoArea.setWrapText(true);
         tabelaProdutos.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             //Check whether item is selected and set value of selected item to Label
             if (tabelaProdutos.getSelectionModel().getSelectedItem() != null) {
-                fieldDescricaoArea.setText(bd.buscaDescricao(newValue.getTcodigo().toString()));
+                try {
+					fieldDescricaoArea.setText(bd.buscaDescricao(conexao, newValue.getTcodigo().toString()));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
                 String teste = "file:///" + "C:/Users/maxim_000/workspace/System/src/images/products/" + newValue.getTcodigo().toString() + ".jpg";
                 imgVTable.setImage(new Image(teste, 200, 220, false, false));
             }
         });
+        
+        try {
+			lblValorEstoque.setText("Valor do estoque (R$): " + z.format(bd.getValorEstoque(conexao)));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+        
+        
+        BackgroundImage myBI= new BackgroundImage(new Image("images/program/Estoque.png"),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                  BackgroundSize.DEFAULT);
+        //then you set to your node
+        paneFundo.setBackground(new Background(myBI));
     }
 	
 	public void buscarFoto (ActionEvent event) {
@@ -189,11 +239,7 @@ public class ControllerEstoque implements Initializable {
 		                }
 		            }
 					
-					
-					
-					
-					
-					
+					lblValorEstoque.setText("Valor do estoque (R$): " + z.format(bd.getValorEstoque(conexao)));
 				} else {
 					conexao = null;
 					JOptionPane.showMessageDialog(null, "Não foi possível adicionar o produto!");
@@ -206,18 +252,29 @@ public class ControllerEstoque implements Initializable {
 		}
 	}
 	
-	public void deletarProduto (ActionEvent event) {
+	public void valorEstoque (ActionEvent event) throws SQLException {
+		float valorEstoqueProduto;
+		
 		Products prod = tabelaProdutos.getSelectionModel().getSelectedItem();
-		bd.deleteProduct(prod.getTcodigo().toString());
-		data.clear();
-		updateTable();
+		valorEstoqueProduto = bd.getValorProdutoEstoque (conexao, prod.getTcodigo());
+		
+		JOptionPane.showMessageDialog(null, "Valor do produto '" + prod.getTnome() + "' em estoque (R$): " + z.format(valorEstoqueProduto));
 	}
 	
-	public void updateTable () {
-		ArrayList<Products> produtos = bd.getProdutos();
+	public void deletarProduto (ActionEvent event) throws SQLException {
+		Products prod = tabelaProdutos.getSelectionModel().getSelectedItem();
+		bd.deleteProduct(conexao, prod.getTcodigo().toString());
+		data.clear();
+		updateTable();
+		lblValorEstoque.setText("Valor do estoque (R$): " + z.format(bd.getValorEstoque(conexao)));
+	}
+	
+	public void updateTable () throws SQLException {
+		ArrayList<Products> produtos = bd.getProdutos(conexao);
 		for (Products produto : produtos) {
 			data.add(produto);
 		}
+		
 	}
 
 	public void editarProduto (ActionEvent event) {

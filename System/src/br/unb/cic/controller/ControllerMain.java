@@ -2,6 +2,7 @@ package br.unb.cic.controller;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
@@ -16,6 +17,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Stage;
 
 public class ControllerMain implements Initializable {
@@ -23,18 +31,18 @@ public class ControllerMain implements Initializable {
 	
 	@FXML private Button btnEntrar;
 	@FXML private Button btnSair;
-	@FXML private Label lblUsuario;
-	@FXML private Label lblSenha;
 	@FXML private TextField txtUsuario;
 	@FXML private PasswordField txtSenha;
 	@FXML private Button btnCadastrarUsuario;
 	@FXML private Button btnTabelas;
+	@FXML private AnchorPane paneFundo;
 	protected DataBase db;
 	protected Connection conexao;
 	protected Options opcoes;
 	protected CadastroUsuario cadastro;
 	protected String usuario;
 	protected String senha;
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -44,9 +52,17 @@ public class ControllerMain implements Initializable {
 		cadastro = new CadastroUsuario();
 		conexao = null;
 		db = new DataBase();
+		
+		
+		 BackgroundImage myBI= new BackgroundImage(new Image("images/program/Start.png"),
+	                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+	                  BackgroundSize.DEFAULT);
+	        //then you set to your node
+	        paneFundo.setBackground(new Background(myBI));
+		
 	}	
 	
-	public void initLogin (ActionEvent event) {
+	public void initLogin (ActionEvent event) throws SQLException {
 		String user = txtUsuario.getText();
 		String password = txtSenha.getText();
 		
@@ -62,7 +78,7 @@ public class ControllerMain implements Initializable {
 				btnTabelas.setVisible(false);
 			}
 		} else {
-			String usuario = db.verificarUsuario(user,password);
+			String usuario = db.verificarUsuario(conexao,user,password);
 			if (!usuario.equals("Error")) {
 				JOptionPane.showMessageDialog(null, "Olá " + usuario + " !");
 				try {
@@ -94,7 +110,7 @@ public class ControllerMain implements Initializable {
 		}
 	}
 	
-	public void criarTabela (ActionEvent event) {
+	public void criarTabela (ActionEvent event) throws SQLException {
 		DataBase bd = new DataBase();
 		Connection conexao = null;
 		bd.createTableUsers(conexao);

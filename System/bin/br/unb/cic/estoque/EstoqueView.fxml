@@ -11,30 +11,52 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.control.cell.PropertyValueFactory ?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unb.cic.controller.ControllerEstoque">
+<AnchorPane fx:id="paneFundo" prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.unb.cic.controller.ControllerEstoque">
    <children>
-      <Label layoutX="545.0" layoutY="14.0" prefHeight="25.0" prefWidth="84.0" text="Estoque" textFill="#2600ae">
+      <Label fx:id="lblBusca" layoutX="16.0" layoutY="207.0" text="Procurar:">
          <font>
-            <Font size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblBusca" layoutX="16.0" layoutY="207.0" text="Procurar:" />
-      <Label fx:id="lblNome" layoutX="22.0" layoutY="66.0" text="Nome:" />
-      <Label fx:id="lblMarca" layoutX="22.0" layoutY="107.0" text="Marca:" />
-      <Label fx:id="lblValor" layoutX="380.0" layoutY="66.0" text="Valor - R$:" />
-      <Label fx:id="lblDescricao" layoutX="381.0" layoutY="107.0" text="Descrição:" />
-      <Label fx:id="lblQuantidade" layoutX="685.0" layoutY="66.0" text="Quantidade inicial:" />
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblNome" layoutX="22.0" layoutY="66.0" text="Nome:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblMarca" layoutX="22.0" layoutY="107.0" text="Marca:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblValor" layoutX="380.0" layoutY="66.0" text="Valor - R$:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblDescricao" layoutX="381.0" layoutY="107.0" text="Descrição:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblQuantidade" layoutX="685.0" layoutY="66.0" text="Quantidade inicial:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <TextField fx:id="fieldNome" layoutX="65.0" layoutY="62.0" prefHeight="25.0" prefWidth="269.0" />
       <TextField fx:id="fieldMarca" layoutX="65.0" layoutY="103.0" prefHeight="25.0" prefWidth="269.0" />
       <TextField fx:id="fieldValor" layoutX="457.0" layoutY="62.0" prefHeight="25.0" prefWidth="200.0" />
       <TextField fx:id="fieldQuantidade" layoutX="793.0" layoutY="62.0" prefHeight="25.0" prefWidth="76.0" />
       <TextField fx:id="fieldDescricao" layoutX="457.0" layoutY="103.0" prefHeight="25.0" prefWidth="204.0" />
-      <Button fx:id="btnCadastrar" layoutX="408.0" layoutY="157.0" mnemonicParsing="false" onAction="#cadastrarProduto" text="Cadastrar" />
+      <Button fx:id="btnCadastrar" layoutX="408.0" layoutY="157.0" mnemonicParsing="false" onAction="#cadastrarProduto" text="Cadastrar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <TextField fx:id="fieldBusca" layoutX="71.0" layoutY="203.0" prefHeight="25.0" prefWidth="558.0" />
-      <Label fx:id="lblUnidades" layoutX="873.0" layoutY="66.0" text="unidades" />
-      <Label fx:id="lblCodigo" layoutX="685.0" layoutY="107.0" text="Código:" />
+      <Label fx:id="lblUnidades" layoutX="873.0" layoutY="66.0" text="unidades">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Label fx:id="lblCodigo" layoutX="685.0" layoutY="107.0" text="Código:">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
       <TextField fx:id="fieldCodigo" layoutX="734.0" layoutY="103.0" prefHeight="25.0" prefWidth="189.0" />
-      <TableView fx:id="tabelaProdutos" layoutX="14.0" layoutY="243.0" prefHeight="396.0" prefWidth="919.0">
+      <TableView fx:id="tabelaProdutos" layoutX="14.0" layoutY="243.0" prefHeight="367.0" prefWidth="919.0">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
@@ -46,15 +68,38 @@
             <TableColumn fx:id="tabelaQuantidade" prefWidth="75.0" text="Quantidade" />
          </columns>
       </TableView>
-      <Button fx:id="btnEditar" layoutX="650.0" layoutY="203.0" mnemonicParsing="false" onAction="#editarProduto" prefHeight="25.0" prefWidth="84.0" text="Editar" />
-      <Button fx:id="btnVoltar" layoutX="296.0" layoutY="157.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="67.0" text="Voltar" />
-      <Button fx:id="btnDeletar" layoutX="747.0" layoutY="203.0" mnemonicParsing="false" onAction="#deletarProduto" prefHeight="25.0" prefWidth="84.0" text="Deletar" />
+      <Button fx:id="btnEditar" layoutX="635.0" layoutY="203.0" mnemonicParsing="false" onAction="#editarProduto" prefHeight="25.0" prefWidth="84.0" text="Editar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnVoltar" layoutX="296.0" layoutY="157.0" mnemonicParsing="false" onAction="#voltar" prefHeight="25.0" prefWidth="67.0" text="Voltar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnDeletar" layoutX="727.0" layoutY="203.0" mnemonicParsing="false" onAction="#deletarProduto" prefHeight="25.0" prefWidth="84.0" text="Deletar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="162.0" layoutX="965.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" width="202.0" />
       <ImageView fx:id="imgVCadastro" fitHeight="160.0" fitWidth="200.0" layoutX="966.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="btnFoto" layoutX="1028.0" layoutY="203.0" mnemonicParsing="false" onAction="#buscarFoto" text="Buscar foto" />
+      <Button fx:id="btnFoto" layoutX="1028.0" layoutY="203.0" mnemonicParsing="false" onAction="#buscarFoto" text="Buscar foto">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fefeff" height="222.0" layoutX="965.0" layoutY="242.0" stroke="BLACK" strokeType="INSIDE" width="202.0" />
       <ImageView fx:id="imgVTable" fitHeight="220.0" fitWidth="200.0" layoutX="966.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true" />
-      <Label layoutX="1040.0" layoutY="480.0" text="Descrição" />
-      <TextArea fx:id="fieldDescricaoArea" layoutX="950.0" layoutY="509.0" prefHeight="130.0" prefWidth="235.0" />
+      <Label layoutX="1040.0" layoutY="480.0" text="Descrição">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <TextArea fx:id="fieldDescricaoArea" layoutX="950.0" layoutY="509.0" prefHeight="100.0" prefWidth="235.0" />
+      <Button fx:id="btnValorEstoque" layoutX="818.0" layoutY="203.0" mnemonicParsing="false" onAction="#valorEstoque" text="Valor em Estoque">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Label fx:id="lblValorEstoque" layoutX="16.0" layoutY="619.0" text="Valor do estoque (R$):">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
    </children>
 </AnchorPane>
