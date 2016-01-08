@@ -154,7 +154,7 @@ public class ControllerEstoque implements Initializable {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-                String teste = "file:///" + "C:/Users/maxim_000/workspace/System/src/images/products/" + newValue.getTcodigo().toString() + ".jpg";
+                String teste = "file:///" + "C:/images/products/" + newValue.getTcodigo().toString() + ".jpg";
                 imgVTable.setImage(new Image(teste, 200, 220, false, false));
             }
         });
@@ -196,7 +196,7 @@ public class ControllerEstoque implements Initializable {
 		
 		if (!nomeImagem.isEmpty() && (!fieldNome.getText().isEmpty() && !fieldMarca.getText().isEmpty()
 				&& !fieldCodigo.getText().isEmpty() && !fieldQuantidade.getText().isEmpty()
-				&& !fieldValor.getText().isEmpty() && !fieldDescricao.getText().isEmpty())) {
+				&& !fieldValor.getText().isEmpty() && !fieldDescricao.getText().isEmpty()) && file != null) {
 			
 			String nome = fieldNome.getText();
 			int codigo = Integer.parseInt(fieldCodigo.getText());
@@ -229,7 +229,7 @@ public class ControllerEstoque implements Initializable {
 					
 					if (file != null) {
 		                try {
-		                	File saida = new File("C:/Users/maxim_000/workspace/System/src/images/products/" + codigo + ".jpg");
+		                	File saida = new File("C:/images/products/" + codigo + ".jpg");
 		                    ImageIO.write(SwingFXUtils.fromFXImage(imgVCadastro.getImage(),null), "jpg", saida);
 		                    imgVCadastro.setImage(null);
 		                    file = null;
